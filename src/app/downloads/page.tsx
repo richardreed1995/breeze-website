@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+
 import { HeroHeader } from '@/components/header';
 import Footer from '@/components/footer';
 import { Download } from 'lucide-react';
@@ -11,10 +11,7 @@ import { Download } from 'lucide-react';
 export default function DownloadsPage() {
   const [step, setStep] = useState(0);
   const [email, setEmail] = useState('');
-  const [formData, setFormData] = useState({
-    revenue: '',
-    constraint: ''
-  });
+
   const [error, setError] = useState('');
 
   const validateEmail = (email: string) => {
@@ -46,31 +43,7 @@ export default function DownloadsPage() {
     setStep(1);
   };
 
-  const handleFormSubmit = async () => {
-    setError('');
-    if (!formData.revenue || !formData.constraint) {
-      return setError("Please fill in all fields");
-    }
 
-    try {
-      await fetch("https://hook.eu2.make.com/19t79l6rolrkfjod77hd2yr952a54ph5", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email,
-          type: "downloads-form-submission",
-          revenue: formData.revenue,
-          constraint: formData.constraint,
-          completedAt: new Date().toISOString(),
-        }),
-      });
-      
-      // Redirect to thank you page or show success message
-      window.location.href = '/downloads/thank-you';
-    } catch (e) {
-      setError("Something went wrong. Please try again.");
-    }
-  };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
@@ -126,59 +99,20 @@ export default function DownloadsPage() {
               </div>
             )}
 
-            {/* Step 2: Detailed Form */}
+            {/* Thank You Message */}
             {step === 1 && (
               <div className="bg-card rounded-3xl shadow-lg border p-6 md:p-8">
-                <div className="text-center mb-6">
-                  <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">Almost there!</h2>
-                  <p className="text-base text-muted-foreground">Help us personalize your experience and deliver the most relevant resources</p>
-                </div>
-                
-                <div className="space-y-4">
-                  <div>
-                    <Label className="text-sm font-medium text-foreground mb-2 block">Annual revenue</Label>
-                    <select
-                      value={formData.revenue}
-                      onChange={(e) => setFormData({ ...formData, revenue: e.target.value })}
-                      className="w-full p-3 h-12 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 bg-background"
-                    >
-                      <option value="">Select your annual revenue</option>
-                      <option value="under-100k">Under $100k</option>
-                      <option value="100k-500k">$100k - $500k</option>
-                      <option value="500k-1m">$500k - $1M</option>
-                      <option value="1m-5m">$1M - $5M</option>
-                      <option value="5m-10m">$5M - $10M</option>
-                      <option value="10m+">$10M+</option>
-                    </select>
+                <div className="text-center space-y-4">
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Download className="h-8 w-8 text-green-600" />
                   </div>
-                  
-                  <div>
-                    <Label className="text-sm font-medium text-foreground mb-2 block">Biggest growth constraint</Label>
-                    <select
-                      value={formData.constraint}
-                      onChange={(e) => setFormData({ ...formData, constraint: e.target.value })}
-                      className="w-full p-3 h-12 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 bg-background"
-                    >
-                      <option value="">Select your biggest constraint</option>
-                      <option value="lead-generation">Lead Generation</option>
-                      <option value="conversion-rate">Conversion Rate</option>
-                      <option value="sales-process">Sales Process</option>
-                      <option value="team-scaling">Team Scaling</option>
-                      <option value="marketing-budget">Marketing Budget</option>
-                      <option value="brand-awareness">Brand Awareness</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
-                  
-                  {error && <p className="text-red-500 text-center font-medium">{error}</p>}
-                  
-                  <Button 
-                    onClick={handleFormSubmit}
-                    className="w-full text-lg py-4 h-14 bg-blue-300 text-white hover:bg-blue-400 font-semibold"
-                  >
-                    <Download className="mr-2 h-5 w-5" />
-                    Download Resources
-                  </Button>
+                  <h2 className="text-2xl md:text-3xl font-bold text-foreground">Thank You!</h2>
+                  <p className="text-base text-muted-foreground">
+                    Your free HubSpot resources are on their way! Please check your email for download links and access instructions.
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    If you don't see the email within a few minutes, please check your spam folder.
+                  </p>
                 </div>
               </div>
             )}
