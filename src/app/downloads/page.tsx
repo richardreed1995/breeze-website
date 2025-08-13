@@ -28,7 +28,7 @@ export default function DownloadsPage() {
     }
 
     // Send data to webhook
-    fetch("https://hook.eu2.make.com/19t79l6rolrkfjod77hd2yr952a54ph5", {
+    fetch("https://hook.eu2.make.com/bct724zlem7g4p1vk51xxsa18v25h4yr", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

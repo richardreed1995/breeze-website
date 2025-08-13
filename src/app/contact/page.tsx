@@ -43,7 +43,7 @@ export default function ContactPage() {
 
     try {
       // Send data to webhook
-      await fetch("https://hook.eu2.make.com/2tm4p7ujcasjwg9owgm55chc8tacb1tb", {
+      await fetch("https://hook.eu2.make.com/ulmuyii8m5lu6l3ulhu1ionc5gjpkp3p", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -57,7 +57,7 @@ export default function ContactPage() {
       });
 
       // Send email alert to richard@breezeb2b.com
-      await fetch("https://hook.eu2.make.com/2tm4p7ujcasjwg9owgm55chc8tacb1tb", {
+      await fetch("https://hook.eu2.make.com/ulmuyii8m5lu6l3ulhu1ionc5gjpkp3p", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

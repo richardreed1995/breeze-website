@@ -28,7 +28,7 @@ export default function NewsletterPage() {
     }
 
     // Send data to webhook
-    fetch("https://hook.eu2.make.com/19t79l6rolrkfjod77hd2yr952a54ph5", {
+    fetch("https://hook.eu2.make.com/ptd9ofx157v7w5ym2x4eemxucynvkw42", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
